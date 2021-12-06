@@ -1,11 +1,13 @@
 """
+1. Handles collusion using linear probing 
+2. 
 
 """
 
 class HashMap:
     def __init__(self, MAX: int= 100):
         self.MAX = MAX
-        self.arr = [None for i in range(self.MAX)]
+        self.arr = [[] for i in range(self.MAX)]
     
     def generate_hash(self, key: str=""):
         """
@@ -22,7 +24,14 @@ class HashMap:
         """
         """
         hash = self.generate_hash(key=key)
-        self.arr[hash] = value
+        found = False
+        for index, element in enumerate(self.arr[hash]):
+            if len(element) ==2 and element[1] == key:
+                self.arr[hash][index] = (key, value)
+                found = True
+                break
+        if not found:
+            self.arr[hash].append((key, value))
     
     def __sethash__(self, key: str ="", value: str= ""):
         """"""
@@ -31,16 +40,19 @@ class HashMap:
         
     def get(self, key: str= ""):
         hash = self.generate_hash(key=key)
-        if not self.arr[hash]:
-            raise KeyError(f"{str(key)} is not a proper key")
-        return self.arr[hash]    
+        for element in self.arr[hash]:
+            if element[0] == key:
+                return element[1]
 
     def __getitem__(self, key):
         hash = self.generate_hash(key=key)
         return self.arr[hash]
-
     # def delete(self, key: str=""):
     #     pass
+
+    # def __delitem__(self, key: str= ""):
+    #    pass
+
 
     # def get_length(self):
     #     pass
