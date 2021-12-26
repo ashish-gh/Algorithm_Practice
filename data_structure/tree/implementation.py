@@ -31,11 +31,25 @@ class TreeNode:
             parent = parent.parent
         return count
     
-    def print(self, type= BaseNodePrinter):
-        if not isinstance(type, [BaseNodePrinter]):
-            raise TypeError("error")
+    def print(self, type: str = "all"):
+
+        if type == "all":
+            indent = self.get_level() * " " *3
+            print(f"{indent} {self.data}")            
+            for child in self.children:
+                child.print()
+        elif type =="level1":
+            level = self.get_level()
+
+            print(f"{indent} {self.data}")            
+            for child in self.children:
+                child.print()
+
+
+
+
+
         
-        type.get_level_printer()
 
 
 
