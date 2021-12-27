@@ -30,7 +30,7 @@ class Solution:
 
 
 if __name__ == "__main__":
-    heights = [1,8,4,5,6,3,3,2,7]
+    heights = [1,2,4,5]
     sl = Solution()
     print(sl.max_area(heights))
 
